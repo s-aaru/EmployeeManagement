@@ -1,0 +1,25 @@
+
+<table class="table">
+<thead>
+	<th>Employee ID</th>
+	<th>Name</th>
+	<th>Age</th>
+	<th>Gender</th>
+	<th>Mobile</th>
+	<th>Mail</th>
+	<th>Edit</th>
+	<th>Delete</th>
+</thead>
+<tbody>
+	<tr *ngFor="let employee of employeeList ">
+	<td>{{employee.id}}</td>
+	<td>{{employee.name}}</td>
+	<td>{{employee.age}}</td>
+	<td>{{employee.gender}}</td>
+	<td>{{employee.mobile}}</td>
+	<td>{{employee.mail}}</td>
+	<td><a routerLink="editEmployee/{{employee.id}}">EDIT</a></td>
+	<td><button (click)="deleteEmployee(employee)">DELETE</button></td>
+	</tr>
+</tbody>
+</table>
