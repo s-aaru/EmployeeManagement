@@ -1,6 +1,4 @@
 import {Injectable, Output, EventEmitter} from '@angular/core';
-import {Subject} from 'rxjs/Subject';
-import {Observable} from 'rxjs/Observable';
 import {Employee} from '../interfaces/employee';
 
 
@@ -8,10 +6,8 @@ import {Employee} from '../interfaces/employee';
 
 export class EmployeeService{
 
- private employeeList:Employee[];
- private employeeListSource = new Subject();
- private updateEmployeeList$:Observable<Employee>;
- @Output() fire: EventEmitter<Employee[]> = new EventEmitter();
+	private employeeList:Employee[];
+	@Output() fire: EventEmitter<Employee[]> = new EventEmitter();
 
 	constructor() { 
 		this.employeeList = [
@@ -22,7 +18,6 @@ export class EmployeeService{
 		{id: 4, name:'Flash', age:'35', gender:'M', mail:'bary@gmail.com', mobile:'9123409009'}
 		];
 
-		this.updateEmployeeList$ = this.employeeListSource.asObservable();
 	}
 
 
@@ -44,7 +39,7 @@ export class EmployeeService{
 				this.employeeList[i] = employee;
 			}
 		}
-        this.fire.emit(this.employeeList);
+		this.fire.emit(this.employeeList);
 	}
 
 	addEmployee(employee:Employee){
@@ -54,6 +49,6 @@ export class EmployeeService{
 	}
 
 	getEmittedValue() {
-     return this.fire;
-   }
+		return this.fire;
+	}
 }

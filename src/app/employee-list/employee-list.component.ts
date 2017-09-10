@@ -13,27 +13,26 @@ export class EmployeeListComponent implements OnInit {
 
   private employeeList:Employee[] ;
   private subscription: Subscription;
-  private zone:NgZone;
 
-  constructor(private employeeService: EmployeeService, private cdRef:ChangeDetectorRef) {
-this.zone = new NgZone({enableLongStackTrace: false});
-      this.subscription = this.employeeService.getEmittedValue()
-      .subscribe(employeeList => {
-
-        this.zone.run(() => {
+  constructor(private employeeService: EmployeeService, private cdRef:ChangeDetectorRef, private zone:NgZone) {
+    this.subscription = this.employeeService.getEmittedValue().subscribe((employeeList:Employee[]) => {
+      this.zone.run(() => {
         this.employeeList=employeeList;
-        cdRef.detectChanges();
-        console.log("updated ",this.employeeList);
+        this.cdRef.detectChanges();
       });
-      });
-    }
-
-    ngOnInit() {
-      this.employeeList = this.employeeService.getEmployeeList();
-    }
-
-    deleteEmployee(employee:any){
-      this.employeeList.splice(employee,1);
-    }
-
+    });
   }
+
+  ngOnInit() {
+    this.employeeList = this.employeeService.getEmployeeList();
+  }
+
+  deleteEmployee(employee:any){
+    this.employeeList.splice(employee,1);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+}

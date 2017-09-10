@@ -1,14 +1,13 @@
 import { Component, OnInit , OnDestroy} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {EmployeeService} from "../model/employee.service";
-import { EmployeeListComponent } from '../employee-list/employee-list.component';
 import {Employee} from '../interfaces/employee';
 
 @Component({
 	selector: 'add-employee',
 	templateUrl: './add-employee.component.html',
 	styleUrls: ['./add-employee.component.css'],
-	providers:[EmployeeService,EmployeeListComponent]
+	providers:[EmployeeService]
 })
 export class AddEmployeeComponent implements OnInit, OnDestroy  {
 
@@ -24,7 +23,7 @@ export class AddEmployeeComponent implements OnInit, OnDestroy  {
 		gender:''
 	};
 
-	constructor(private route: ActivatedRoute, private employeeService: EmployeeService, private employeeListComponent: EmployeeListComponent) { }
+	constructor(private route: ActivatedRoute, private employeeService: EmployeeService) { }
 
 	ngOnInit() {
 		this.sub = this.route.params.subscribe(params => {

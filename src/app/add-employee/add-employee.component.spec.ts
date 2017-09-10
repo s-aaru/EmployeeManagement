@@ -4,7 +4,7 @@ import { AddEmployeeComponent } from './add-employee.component';
 import {EmployeeService} from "../model/employee.service";
 import { FormsModule } from '@angular/forms';
 
-fdescribe('AddEmployeeComponent', () => {
+describe('AddEmployeeComponent', () => {
   let component: AddEmployeeComponent;
   let fixture: ComponentFixture<AddEmployeeComponent>;
   let activatedRoute: ActivatedRoute;
@@ -48,13 +48,11 @@ fdescribe('AddEmployeeComponent', () => {
 
   it('should call updateEmployee if params is passed', () => {
     activatedRoute.params['id'] = 5;
-    expect(component.action).toBe("Save");
     expect(employeeService.updateEmployee).toHaveBeenCalled();
   });
 
   it('should call addEmployee if no params is passed', () => {
     activatedRoute.params = undefined;
-    expect(component.action).toBe("Add");
     expect(employeeService.addEmployee).toHaveBeenCalled();
   });
 });
